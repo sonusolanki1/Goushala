@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, Cambria, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  
+  /* SINGLE COLOR UI SYSTEM: Spiritual Deep Saffron / Terracotta Accent */
+  --color-brand-gold-50: #fffbf7;
+  --color-brand-gold-100: #ffeedb;
+  --color-brand-gold-200: #ffdcb3;
+  --color-brand-gold-300: #ffc280;
+  --color-brand-gold-400: #ffa147;
+  --color-brand-gold-500: #f97316; /* Primary Saffron Accent */
+  --color-brand-gold-600: #ea580c;
+  --color-brand-gold-700: #c2410c; /* Deep Terracotta */
+  --color-brand-gold-800: #9a3412;
+  --color-brand-gold-900: #7c2d12;
+
+  /* Map brand-green to deep warm neutral grays to preserve the single accent saffron scheme */
+  --color-brand-green-50: #fafaf9;
+  --color-brand-green-100: #f5f5f4;
+  --color-brand-green-600: #44403c;
+  --color-brand-green-700: #292524;
+  --color-brand-green-800: #1c1917;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-amber-50/10 text-slate-800 font-sans selection:bg-brand-gold-200 selection:text-brand-gold-900;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif;
+  }
+}
+
+/* Glassmorphism utility classes */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(249, 115, 22, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+.glass-dark {
+  background: rgba(28, 25, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Premium gradient overlays */
+.hero-gradient {
+  background: linear-gradient(to bottom, rgba(28, 25, 23, 0.7) 0%, rgba(28, 25, 23, 0.35) 50%, rgba(28, 25, 23, 0.85) 100%);
+}
+
+.gold-gradient-text {
+  @apply bg-gradient-to-r from-brand-gold-600 via-brand-gold-500 to-brand-gold-800 bg-clip-text text-transparent;
+}
+
+/* Custom animations */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.95; transform: scale(1.015); }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s infinite ease-in-out;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(194, 65, 12, 0.2);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(194, 65, 12, 0.4);
+}

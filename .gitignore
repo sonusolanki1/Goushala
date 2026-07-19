@@ -1,0 +1,25 @@
+# Dependencies
+**/node_modules/
+
+# Production builds
+**/dist/
+**/dist-ssr/
+
+# Local environmental secret variables
+**/.env
+**/.env.production
+**/.env.local
+**/.env.*.local
+
+# Databases & local logs
+**/*.db
+**/*.db-journal
+**/*.log
+**/npm-debug.log*
+
+# Static uploads
+**/uploads/
+
+# OS specific files
+.DS_Store
+Thumbs.db
