@@ -42,7 +42,7 @@ export default function DonateModal({ isOpen, onClose, selectedSevaPreset }) {
   const handleDonate = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-    
+
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount) || parsedAmount <= 0) {
       setErrorMessage('Please enter a valid donation amount.');
@@ -102,8 +102,8 @@ export default function DonateModal({ isOpen, onClose, selectedSevaPreset }) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" 
+      <div
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       ></div>
 
@@ -113,7 +113,7 @@ export default function DonateModal({ isOpen, onClose, selectedSevaPreset }) {
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-gold-400 via-amber-500 to-brand-green-600"></div>
 
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
         >
@@ -129,13 +129,13 @@ export default function DonateModal({ isOpen, onClose, selectedSevaPreset }) {
             Sponsor Gau Seva
           </h3>
           <p className="text-xs text-slate-500 font-light mt-1">
-            Krishna Govind Seva Sansthan Trust Goushala
+            Krishna Govind Seva Sansthan NGO Goushala
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleDonate} className="space-y-4">
-          
+
           {/* Seva Type Dropdown */}
           <div>
             <label className="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">

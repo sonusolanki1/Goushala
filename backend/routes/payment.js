@@ -1,7 +1,7 @@
 import express from 'express';
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
-import { dbRun, dbGet } from '../db.js';
+import Donation from '../models/Donation.js';
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ router.post('/create-checkout-session', async (req, res) => {
             currency: 'inr',
             product_data: {
               name: `Seva Contribution: ${sevaType || 'General Seva'}`,
-              description: `Thank you for supporting Krishna Govind Seva Sansthan Trust. Donor: ${donorName || 'Anonymous'}`,
+              description: `Thank you for supporting Krishna Govind Seva Sansthan NGO. Donor: ${donorName || 'Anonymous'}`,
             },
             unit_amount: Math.round(amount * 100), // convert to paise
           },
@@ -44,12 +44,16 @@ router.post('/create-checkout-session', async (req, res) => {
       },
     });
 
-    // Save temporary donation record with status 'pending'
-    await dbRun(
-      `INSERT INTO donations (stripe_session_id, donor_name, donor_email, amount, currency, status) 
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [session.id, donorName || 'Anonymous', donorEmail || 'N/A', amount, 'inr', 'pending']
-    );
+    // Save temporary donation record with status 'pending' in MongoDB
+    const newDonation = new Donation({
+      stripe_session_id: session.id,
+      donor_name: donorName || 'Anonymous',
+      donor_email: donorEmail || 'N/A',
+      amount: amount,
+      currency: 'inr',
+      status: 'pending'
+    });
+    await newDonation.save();
 
     res.json({ id: session.id, url: session.url });
   } catch (error) {
@@ -71,20 +75,24 @@ router.get('/verify-session/:sessionId', async (req, res) => {
       const donorEmail = session.metadata.donorEmail || session.customer_details?.email || 'N/A';
       const amount = parseFloat(session.metadata.amount) || (session.amount_total / 100);
 
-      // Update in our database if status is pending
-      const existing = await dbGet(`SELECT * FROM donations WHERE stripe_session_id = ?`, [sessionId]);
+      // Find in our database and update status to completed
+      let donation = await Donation.findOne({ stripe_session_id: sessionId });
       
-      if (existing) {
-        await dbRun(
-          `UPDATE donations SET donor_name = ?, donor_email = ?, status = 'completed' WHERE stripe_session_id = ?`,
-          [donorName, donorEmail, sessionId]
-        );
+      if (donation) {
+        donation.donor_name = donorName;
+        donation.donor_email = donorEmail;
+        donation.status = 'completed';
+        await donation.save();
       } else {
-        await dbRun(
-          `INSERT INTO donations (stripe_session_id, donor_name, donor_email, amount, currency, status) 
-           VALUES (?, ?, ?, ?, ?, ?)`,
-          [sessionId, donorName, donorEmail, amount, 'inr', 'completed']
-        );
+        donation = new Donation({
+          stripe_session_id: sessionId,
+          donor_name: donorName,
+          donor_email: donorEmail,
+          amount: amount,
+          currency: 'inr',
+          status: 'completed'
+        });
+        await donation.save();
       }
       
       return res.json({ status: 'completed', amount, donorName });

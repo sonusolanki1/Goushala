@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { dbRun, dbQuery } from '../db.js';
+import DailyUpdate from '../models/DailyUpdate.js';
 import { authenticateJWT } from './admin.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -60,13 +60,10 @@ router.post('/upload', authenticateJWT, upload.single('mediaFile'), (req, res) =
 // 2. Public Route: Get all daily Goushala updates
 router.get('/', async (req, res) => {
   try {
-    const updates = await dbQuery(`
-      SELECT * FROM daily_updates 
-      ORDER BY created_at DESC
-    `);
+    const updates = await DailyUpdate.find().sort({ created_at: -1 });
     res.json(updates);
   } catch (error) {
-    console.error('Error fetching updates:', error);
+    console.error('Error fetching updates from MongoDB:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -80,13 +77,16 @@ router.post('/', authenticateJWT, async (req, res) => {
   }
 
   try {
-    const result = await dbRun(
-      `INSERT INTO daily_updates (title, description, media_url, media_type) VALUES (?, ?, ?, ?)`,
-      [title, description, media_url || '', media_type || 'image']
-    );
-    res.status(201).json({ id: result.id, success: true, message: 'Update entry created.' });
+    const newUpdate = new DailyUpdate({
+      title,
+      description,
+      media_url: media_url || '',
+      media_type: media_type || 'image'
+    });
+    await newUpdate.save();
+    res.status(201).json({ id: newUpdate._id, success: true, message: 'Update entry created in MongoDB.' });
   } catch (error) {
-    console.error('Error creating update:', error);
+    console.error('Error creating update in MongoDB:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -96,8 +96,8 @@ router.delete('/:id', authenticateJWT, async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await dbRun(`DELETE FROM daily_updates WHERE id = ?`, [id]);
-    if (result.changes === 0) {
+    const result = await DailyUpdate.findByIdAndDelete(id);
+    if (!result) {
       return res.status(404).json({ error: 'Update not found.' });
     }
     res.json({ success: true, message: 'Deleted successfully.' });

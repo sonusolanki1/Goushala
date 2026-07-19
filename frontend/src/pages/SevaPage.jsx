@@ -52,7 +52,7 @@ export default function SevaPage() {
   ];
 
   return (
-    <div className="flex-1 animate-fadeIn bg-white py-16">
+    <div className="flex-1 animate-fadeIn bg-transparent py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -75,14 +75,14 @@ export default function SevaPage() {
           {sevas.map((seva) => (
             <div 
               key={seva.id} 
-              className="bg-amber-50/20 rounded-3xl p-8 border border-amber-100 hover:border-brand-gold-300 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative group"
+              className="bg-amber-50/20 rounded-3xl p-8 border border-amber-100 hover:border-brand-gold-300 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-350 flex flex-col justify-between relative group cursor-default"
             >
               {/* Badge */}
-              <div className="absolute top-4 right-4 bg-brand-gold-50 text-brand-gold-800 text-xs font-semibold px-3 py-1 rounded-full border border-brand-gold-200">
+              <div className="absolute top-4 right-4 bg-brand-gold-50 text-brand-gold-800 text-xs font-semibold px-3.5 py-1 rounded-full border border-brand-gold-200 shadow-sm">
                 {seva.badge}
               </div>
 
-              <div>
+              <div className="mt-2">
                 <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold block mb-1">
                   {seva.tagline}
                 </span>
@@ -108,7 +108,7 @@ export default function SevaPage() {
               {/* Link CTA redirecting to /donate page with query param */}
               <Link
                 to={`/donate?seva=${seva.id}`}
-                className={`w-full py-4 rounded-2xl text-white font-semibold flex items-center justify-center space-x-2 bg-gradient-to-r ${seva.color} shadow-md group-hover:shadow-lg group-hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer`}
+                className={`w-full py-4 rounded-2xl text-white font-semibold flex items-center justify-center space-x-2 bg-gradient-to-r ${seva.color} shadow-md group-hover:shadow-lg hover:brightness-105 active:scale-[0.98] transition-all duration-300 cursor-pointer`}
               >
                 {seva.price === 'Custom' ? (
                   <PlusCircle className="w-5 h-5" />

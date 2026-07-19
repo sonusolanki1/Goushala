@@ -1,8 +1,8 @@
 @echo off
-title Krishna Govind Seva Sansthan Trust - Goushala App Launcher
+title Krishna Govind Seva Sansthan NGO - Goushala App Launcher
 cls
 echo =======================================================================
-echo    KRISHNA GOVIND SEVA SANSTHAN TRUST - GOUSHALA APP LAUNCHER (WINDOWS)
+echo    Krishna Govind Seva Sansthan NGO - GOUSHALA APP LAUNCHER (WINDOWS)
 echo =======================================================================
 echo.
 echo Preparing launch sequences...

@@ -1,7 +1,7 @@
 {
   "name": "goushala-backend",
   "version": "1.0.0",
-  "description": "Backend for Krishna Govind Seva Sansthan Trust Goushala",
+  "description": "Backend for Krishna Govind Seva Sansthan NGO Goushala",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -13,7 +13,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.6.0",
+    "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.7.4",
+    "morgan": "^1.11.0",
     "multer": "^2.2.0",
     "sqlite3": "^5.1.7",
     "stripe": "^15.12.0"

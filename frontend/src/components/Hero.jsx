@@ -31,7 +31,7 @@ export default function Hero() {
         
         <h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-serif font-extrabold leading-tight tracking-tight mb-6">
           Krishna Govind <br className="hidden md:inline" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold-300 via-amber-300 to-yellow-400">
+          <span className="text-brand-gold-500">
             Seva Sansthan NGO
           </span>
         </h1>
@@ -45,9 +45,9 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 items-center">
           <Link
             to="/donate"
-            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-gradient-to-r from-brand-gold-400 via-brand-gold-500 to-amber-600 text-slate-900 font-bold px-8 py-4 rounded-full shadow-2xl hover:shadow-amber-500/20 hover:scale-105 transition-all duration-300 text-lg cursor-pointer animate-pulse-soft"
+            className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-brand-gold-500 hover:bg-brand-gold-600 text-white font-bold px-8 py-4 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 text-lg cursor-pointer"
           >
-            <Heart className="w-5 h-5 fill-slate-900 stroke-slate-900" />
+            <Heart className="w-5 h-5 fill-white stroke-white" />
             <span>Perform Gau Seva</span>
           </Link>
           

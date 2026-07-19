@@ -119,7 +119,7 @@ export default function UpdatesPage() {
   };
 
   return (
-    <div className="flex-1 animate-fadeIn bg-white py-16">
+    <div className="flex-1 animate-fadeIn bg-transparent py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -169,7 +169,7 @@ export default function UpdatesPage() {
                   return (
                     <div 
                       key={post.id} 
-                      className="bg-brand-gold-50/15 border border-brand-gold-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+                      className="bg-white border border-brand-gold-100/60 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-brand-gold-200 hover:-translate-y-1.5 transition-all duration-350 flex flex-col h-full group cursor-default"
                     >
                       {/* Media Wrapper */}
                       {post.media_url && (

@@ -268,9 +268,13 @@ export default function AdminDashboard() {
       {/* Header bar */}
       <header className="bg-slate-900 border-b border-slate-800 px-6 py-4 flex items-center justify-between shadow-md">
         <div className="flex items-center space-x-3">
-          <div className="bg-brand-gold-500/10 p-2 rounded-xl border border-brand-gold-500/20 text-brand-gold-400">
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+          <div className="bg-brand-gold-500/10 p-1.5 rounded-xl border border-brand-gold-500/20 text-brand-gold-400">
+            <svg className="w-7 h-7 text-brand-gold-500 transition-transform duration-500 group-hover:rotate-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="12" cy="12" r="10" strokeDasharray="3 2" className="animate-spin-slow opacity-60" />
+              <path d="M12 17a5 5 0 0 0 5-5c0-3-2.5-4.5-5-6-2.5 1.5-5 3-5 6a5 5 0 0 0 5 5z" fill="currentColor" className="opacity-20" />
+              <path d="M12 6c-1.5-2-3-2-3 0 0 2 2 3.5 3 4.5 1-1 3-2.5 3-4.5 0-2-1.5-2-3 0z" />
+              <path d="M9 12.5c-.8 0-1.5-.5-1.5-1.2 0-1 .8-1.8 1.8-1.8.5 0 .9.2 1.2.5" />
+              <path d="M15 12.5c.8 0 1.5-.5 1.5-1.2 0-1-.8-1.8-1.8-1.8-.5 0-.9.2-1.2.5" />
             </svg>
           </div>
           <div>

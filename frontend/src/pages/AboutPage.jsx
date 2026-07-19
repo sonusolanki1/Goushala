@@ -5,29 +5,29 @@ import { Heart, ShieldCheck, Award, Flame, Star, Sparkles, Camera } from 'lucide
 export default function AboutPage() {
   const coreValues = [
     {
-      icon: <ShieldCheck className="w-6 h-6 text-brand-gold-600" />,
+      icon: <ShieldCheck className="w-6 h-6" />,
       title: "Rescuing & Rehabilitation",
       desc: "Providing a permanent, safe shelter to cows rescued from illegal slaughter houses, highway accidents, and severe neglect."
     },
     {
-      icon: <Award className="w-6 h-6 text-brand-gold-600" />,
+      icon: <Award className="w-6 h-6" />,
       title: "Veterinary Excellence",
       desc: "An on-site clinic running 24/7 with professional doctors to treat sick or accidental cow victims."
     },
     {
-      icon: <Flame className="w-6 h-6 text-brand-gold-600" />,
+      icon: <Flame className="w-6 h-6" />,
       title: "Spiritual Goushala Environment",
       desc: "Surrounding Gomata with positive, divine energies using regular morning pujas, sweet music, and Vedic chants."
     },
     {
-      icon: <Star className="w-6 h-6 text-brand-gold-600" />,
+      icon: <Star className="w-6 h-6" />,
       title: "Panchagavya Organic Farming",
       desc: "Utilizing cow dung manure and bio-pesticides to encourage ecofriendly, chemical-free organic farming practices."
     }
   ];
 
   return (
-    <div className="flex-1 animate-fadeIn bg-white py-16">
+    <div className="flex-1 animate-fadeIn bg-transparent py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Title */}
@@ -130,12 +130,12 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {coreValues.map((pillar, idx) => (
-              <div key={idx} className="bg-brand-gold-50/15 p-8 rounded-3xl border border-brand-gold-100 hover:shadow-md transition-all duration-300 flex space-x-4">
-                <div className="bg-brand-gold-100 p-3 rounded-2xl h-fit shrink-0 text-brand-gold-700">
+              <div key={idx} className="bg-brand-gold-50/15 p-8 rounded-3xl border border-brand-gold-100 hover:shadow-lg hover:border-brand-gold-200 hover:-translate-y-1 transition-all duration-350 flex space-x-4 group cursor-default">
+                <div className="bg-brand-gold-100 text-brand-gold-700 p-3 rounded-2xl h-fit shrink-0 group-hover:bg-brand-gold-500 group-hover:text-white transition-all duration-350">
                   {pillar.icon}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-850 font-serif mb-2">{pillar.title}</h3>
+                  <h3 className="text-lg font-bold text-slate-850 font-serif mb-2 group-hover:text-brand-gold-700 transition-colors duration-300">{pillar.title}</h3>
                   <p className="text-sm text-slate-500 font-light leading-relaxed">{pillar.desc}</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
         </div>
 
         {/* CTA to Seva */}
-        <div className="bg-gradient-to-r from-brand-gold-500 to-amber-600 rounded-3xl p-8 md:p-12 text-center text-white space-y-6 shadow-xl max-w-4xl mx-auto">
+        <div className="bg-zinc-950 border border-zinc-900 rounded-3xl p-8 md:p-12 text-center text-white space-y-6 shadow-xl max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-4xl font-serif font-bold">
             Support Our NGO Cow Welfare Mission
           </h2>
@@ -154,7 +154,7 @@ export default function AboutPage() {
           <div className="pt-2">
             <Link
               to="/donate"
-              className="inline-flex items-center justify-center space-x-2 bg-slate-950 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform"
+              className="inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-brand-gold-500 to-amber-600 text-white font-bold px-8 py-4 rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 border border-brand-gold-400/20"
             >
               <Heart className="w-4 h-4 fill-white" />
               <span>Contribute Seva Online</span>
