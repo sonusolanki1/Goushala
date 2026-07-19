@@ -1,0 +1,13 @@
+# Netlify configuration file for Krishna Govind Goushala NGO
+# Put this at the root of your repository so Netlify knows how to build the frontend folder.
+
+[build]
+  base = "frontend"
+  publish = "dist"
+  command = "npm run build"
+
+# Handle React Router fallback navigation
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

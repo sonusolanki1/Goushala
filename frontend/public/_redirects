@@ -1,0 +1,2 @@
+# Redirect rule for Netlify Single Page Application fallback routing
+/*    /index.html   200
