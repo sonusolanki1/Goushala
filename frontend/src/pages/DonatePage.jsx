@@ -20,7 +20,7 @@ export default function DonatePage() {
     { id: 'adopt_month', name: 'Adopt a Cow Monthly (₹2,500)', defaultPrice: 2500 },
     { id: 'medical_care', name: 'Injured Cow Medical Fund (₹5,000)', defaultPrice: 5000 },
     { id: 'lifetime_adopt', name: 'Lifetime Adopt & Sponsor (₹21,000)', defaultPrice: 21000 },
-    { id: 'general_fund', name: 'General NGO Goushala Fund (Custom Amount)', defaultPrice: '' }
+    { id: 'general_fund', name: 'General Goushala Fund (Custom Amount)', defaultPrice: '' }
   ];
 
   // Sync selected query parameter from URL
@@ -113,75 +113,74 @@ export default function DonatePage() {
       }
     } catch (err) {
       console.error(err);
-      setErrorMessage(err.message || 'Server connection error. Please try again later.');
+      setErrorMessage(err.message || 'Server connection offline. If offline, bank transfer remains fully active.');
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex-1 animate-fadeIn bg-white py-24 text-zinc-900 font-sans">
+    <div className="flex-1 bg-stone-50/50 py-16 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-brand-gold-500 font-bold text-xs uppercase tracking-widest bg-brand-gold-50 px-4 py-1.5 rounded-full inline-block mb-3 border border-brand-gold-200">
-            Sponsorship & Seva Gateway
+          <span className="text-brand-gold-700 font-bold text-xs uppercase tracking-widest bg-brand-gold-100/60 px-4 py-1.5 rounded-full inline-block mb-3 font-sans">
+            Sponsorship Gateway
           </span>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-zinc-900 leading-tight">
             Sponsor Sacred Gau Seva
           </h1>
           <div className="h-1 w-20 bg-brand-gold-500 mx-auto mt-4 rounded-full"></div>
-          <p className="text-zinc-500 mt-5 text-sm font-light leading-relaxed">
-            Support the daily feeding, shelter, and medical protection of 350+ sacred cows. 
-            Choose either instant online checkouts or direct bank transfer wire.
+          <p className="text-zinc-500 mt-5 text-sm md:text-base font-light leading-relaxed">
+            Support the daily feeding, shelter construction, and veterinary medicines of 350+ sacred cows. Choose online payment or direct bank transfer.
           </p>
         </div>
 
         {/* Form Container split layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-start">
           
           {/* Left Column: Direct Bank Transfer Details Card */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
             
-            <div className="bg-gradient-to-br from-zinc-900 via-zinc-950 to-neutral-900 text-white rounded-3xl p-8 border border-amber-500/20 shadow-2xl relative overflow-hidden flex flex-col justify-between hover:border-brand-gold-500/40 transition-colors duration-500 group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold-500/10 rounded-full blur-2xl group-hover:bg-brand-gold-500/15 transition-all duration-500"></div>
+            <div className="bg-zinc-950 text-white rounded-3xl p-6 md:p-8 border border-zinc-900 shadow-xl relative overflow-hidden flex flex-col justify-between group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold-500/5 rounded-full blur-2xl transition-all duration-500"></div>
               
               <div>
                 <span className="text-[10px] text-brand-gold-400 font-bold uppercase tracking-widest block mb-2">
                   SECURE WIRE TRANSFER
                 </span>
                 <h3 className="text-xl font-serif font-bold text-white mb-4 flex items-center space-x-2.5">
-                  <Landmark className="w-5.5 h-5.5 text-brand-gold-500" />
+                  <Landmark className="w-5 h-5 text-brand-gold-500" />
                   <span>Direct Bank Details</span>
                 </h3>
                 <p className="text-slate-400 text-xs font-light leading-relaxed mb-6">
-                  For major contributions, monthly standing instructions, or manual bank wire deposits, please transfer directly to our NGO account:
+                  For major contributions, monthly standing orders, or manual deposits, please transfer directly to our trust account:
                 </p>
 
                 {/* Account Details Blocks */}
-                <div className="space-y-4 text-xs">
+                <div className="space-y-4 text-xs font-sans">
                   
                   {/* Account Name */}
-                  <div className="flex justify-between items-center border-b border-zinc-800/80 pb-2">
-                    <span className="text-slate-400">NGO Beneficiary:</span>
-                    <span className="font-semibold text-white text-right">Krishna Govind Seva Sansthan NGO</span>
+                  <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
+                    <span className="text-slate-400">Trust Account Name:</span>
+                    <span className="font-semibold text-white text-right font-sans">Krishna Govind Seva Sansthan NGO</span>
                   </div>
 
                   {/* Bank Name */}
-                  <div className="flex justify-between items-center border-b border-zinc-800/80 pb-2">
+                  <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
                     <span className="text-slate-400">Bank Name:</span>
                     <span className="font-semibold text-white">State Bank of India (SBI)</span>
                   </div>
 
                   {/* Account Number */}
-                  <div className="flex justify-between items-center border-b border-zinc-800/80 pb-2">
+                  <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
                     <span className="text-slate-400">Account Number:</span>
                     <div className="flex items-center space-x-1.5">
-                      <span className="font-mono font-bold text-brand-gold-400 text-sm">4108108108108</span>
+                      <span className="font-mono font-bold text-brand-gold-500 text-sm">4108108108108</span>
                       <button 
                         type="button" 
                         onClick={() => handleCopy('4108108108108', 'acc')} 
-                        className="text-slate-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition-colors"
+                        className="text-slate-400 hover:text-white p-1 rounded hover:bg-zinc-900 transition-colors cursor-pointer"
                       >
                         {copiedField === 'acc' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       </button>
@@ -189,14 +188,14 @@ export default function DonatePage() {
                   </div>
 
                   {/* IFSC Code */}
-                  <div className="flex justify-between items-center border-b border-zinc-800/80 pb-2">
+                  <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
                     <span className="text-slate-400">IFSC Code:</span>
                     <div className="flex items-center space-x-1.5">
                       <span className="font-mono font-bold text-white">SBIN0000108</span>
                       <button 
                         type="button" 
                         onClick={() => handleCopy('SBIN0000108', 'ifsc')} 
-                        className="text-slate-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition-colors"
+                        className="text-slate-400 hover:text-white p-1 rounded hover:bg-zinc-900 transition-colors cursor-pointer"
                       >
                         {copiedField === 'ifsc' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       </button>
@@ -204,14 +203,14 @@ export default function DonatePage() {
                   </div>
 
                   {/* UPI Address */}
-                  <div className="flex justify-between items-center border-b border-zinc-800/80 pb-2">
+                  <div className="flex justify-between items-center border-b border-zinc-900 pb-2">
                     <span className="text-slate-400">UPI ID / VPA:</span>
                     <div className="flex items-center space-x-1.5">
-                      <span className="font-mono text-brand-gold-400 font-semibold">krishnagovind@sbi</span>
+                      <span className="font-mono text-brand-gold-500 font-semibold">krishnagovind@sbi</span>
                       <button 
                         type="button" 
                         onClick={() => handleCopy('krishnagovind@sbi', 'upi')} 
-                        className="text-slate-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition-colors"
+                        className="text-slate-400 hover:text-white p-1 rounded hover:bg-zinc-900 transition-colors cursor-pointer"
                       >
                         {copiedField === 'upi' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       </button>
@@ -220,60 +219,48 @@ export default function DonatePage() {
 
                   {/* Branch name */}
                   <div className="flex justify-between items-center pb-2">
-                    <span className="text-slate-400">Branch:</span>
-                    <span className="font-semibold text-white text-right">Dwarka Sector-5, New Delhi</span>
+                    <span className="text-slate-400">Branch Name:</span>
+                    <span className="font-semibold text-white text-right">Salumber Branch, Rajasthan</span>
                   </div>
 
                 </div>
 
               </div>
 
-              <div className="border-t border-zinc-800/80 pt-6 space-y-4">
-                <div className="flex items-start space-x-3 text-xs">
+              <div className="border-t border-zinc-900 pt-6 space-y-3 font-sans text-xs">
+                <div className="flex items-start space-x-3">
                   <ShieldCheck className="w-4.5 h-4.5 text-brand-gold-500 shrink-0 mt-0.5" />
-                  <p className="text-slate-350 leading-relaxed">All direct bank deposits qualify for tax deduction receipts.</p>
+                  <p className="text-slate-400 leading-relaxed font-light">All direct bank deposits qualify for tax deduction receipts.</p>
                 </div>
-                <div className="flex items-start space-x-3 text-xs">
+                <div className="flex items-start space-x-3">
                   <ShieldCheck className="w-4.5 h-4.5 text-brand-gold-500 shrink-0 mt-0.5" />
-                  <p className="text-slate-350 leading-relaxed">Please email bank deposit slips to verify updates.</p>
+                  <p className="text-slate-400 leading-relaxed font-light">Please email bank deposit slips to verify updates.</p>
                 </div>
               </div>
-            </div>
-
-            {/* Saffron Image Card (seva3.jpeg) */}
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-zinc-200 aspect-video group bg-slate-100">
-              <img 
-                src="/seva3.jpeg" 
-                alt="Emergency Medical Seva" 
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
-                onError={(e) => {
-                  e.target.onerror = null; 
-                  e.target.src = "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=800&q=80";
-                }}
-              />
             </div>
 
           </div>
 
           {/* Right Column: Donation Form */}
-          <div className="lg:col-span-7 bg-white border border-zinc-200/80 p-8 rounded-3xl shadow-xl relative hover:border-zinc-300 transition-all duration-300">
+          <div className="lg:col-span-7 bg-white border border-stone-200/80 p-6 md:p-8 rounded-3xl shadow-sm relative">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-gold-500"></div>
             
             <h3 className="text-lg font-serif font-bold text-zinc-900 mb-6 flex items-center space-x-2">
               <CreditCard className="w-5 h-5 text-brand-gold-500" />
-              <span>Instant Card Payment (Stripe)</span>
+              <span>Instant Card / UPI Payment</span>
             </h3>
 
-            <form onSubmit={handleDonate} className="space-y-5 text-xs font-medium text-slate-700">
+            <form onSubmit={handleDonate} className="space-y-5 text-xs font-semibold text-zinc-650">
               
               {/* Seva Category selection */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+                <label className="block text-[11px] font-bold text-zinc-500 mb-2 uppercase tracking-wider font-sans">
                   Select Seva Category
                 </label>
                 <select
                   value={sevaType}
                   onChange={handleSevaChange}
-                  className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                  className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans cursor-pointer"
                 >
                   {sevaOptions.map(option => (
                     <option key={option.id} value={option.id}>
@@ -285,11 +272,11 @@ export default function DonatePage() {
 
               {/* Amount field */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+                <label className="block text-[11px] font-bold text-zinc-500 mb-2 uppercase tracking-wider font-sans">
                   Donation Amount (INR)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 font-serif font-bold text-lg">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 font-serif font-bold text-base">
                     ₹
                   </span>
                   <input
@@ -299,12 +286,12 @@ export default function DonatePage() {
                     disabled={sevaType !== 'general_fund'}
                     placeholder="Enter custom amount"
                     min="1"
-                    className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl pl-8 pr-4 py-3 text-base text-zinc-800 font-serif font-bold focus:outline-none focus:border-brand-gold-500 disabled:opacity-70 disabled:bg-zinc-100 disabled:cursor-not-allowed transition-all duration-300"
+                    className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl pl-8 pr-4 py-3.5 text-base text-zinc-900 font-serif font-bold focus:outline-none focus:border-brand-gold-500 disabled:opacity-75 disabled:bg-stone-100 disabled:cursor-not-allowed transition-all"
                     required
                   />
                 </div>
                 {sevaType !== 'general_fund' && (
-                  <span className="text-[10px] text-zinc-400 mt-1 block font-mono">
+                  <span className="text-[10px] text-zinc-450 mt-1.5 block font-sans font-light">
                     * Locked preset package price. Switch category to "General Goushala Fund" to specify custom amounts.
                   </span>
                 )}
@@ -312,7 +299,7 @@ export default function DonatePage() {
 
               {/* Donor Name */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+                <label className="block text-[11px] font-bold text-zinc-500 mb-2 uppercase tracking-wider font-sans">
                   Your Full Name
                 </label>
                 <input
@@ -320,14 +307,14 @@ export default function DonatePage() {
                   value={donorName}
                   onChange={(e) => setDonorName(e.target.value)}
                   placeholder="e.g. Rajesh Kumar"
-                  className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                  className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans"
                   required
                 />
               </div>
 
               {/* Donor Email */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+                <label className="block text-[11px] font-bold text-zinc-500 mb-2 uppercase tracking-wider font-sans">
                   Your Email Address
                 </label>
                 <input
@@ -335,22 +322,22 @@ export default function DonatePage() {
                   value={donorEmail}
                   onChange={(e) => setDonorEmail(e.target.value)}
                   placeholder="e.g. rajesh@example.com"
-                  className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                  className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans"
                   required
                 />
               </div>
 
               {/* Donor Phone */}
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+                <label className="block text-[11px] font-bold text-zinc-500 mb-2 uppercase tracking-wider font-sans">
                   Your Phone Number
                 </label>
                 <input
                   type="tel"
                   value={donorPhone}
                   onChange={(e) => setDonorPhone(e.target.value)}
-                  placeholder="e.g. +91 9876543210"
-                  className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                  placeholder="e.g. +91 98765 43210"
+                  className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans"
                   required
                 />
               </div>
@@ -358,7 +345,7 @@ export default function DonatePage() {
               {/* Error Box */}
               {errorMessage && (
                 <div className="flex items-center space-x-2 bg-red-50 text-red-700 px-4 py-3 rounded-xl border border-red-150 text-xs">
-                  <ShieldAlert className="w-4 h-4 shrink-0" />
+                  <ShieldAlert className="w-4.5 h-4.5 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
@@ -367,12 +354,12 @@ export default function DonatePage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 rounded-xl text-white font-bold bg-gradient-to-r from-brand-gold-500 to-amber-600 shadow-md hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition-all duration-300 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center space-x-2 text-sm"
+                className="w-full py-4 rounded-xl text-white font-bold bg-zinc-950 hover:bg-brand-gold-600 transition-colors shadow-sm disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center space-x-2 text-xs"
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>Connecting to Stripe checkout...</span>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Connecting to Secure gateway...</span>
                   </>
                 ) : (
                   <>

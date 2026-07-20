@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, MessageSquare, CheckCircle2, Send, Info } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -7,30 +8,28 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate inquiry submission
     setIsSubmitted(true);
     setTimeout(() => {
       setFormData({ name: '', email: '', subject: '', message: '' });
       setIsSubmitted(false);
-    }, 5000);
+    }, 4000);
   };
 
   return (
-    <div className="flex-1 animate-fadeIn bg-transparent py-16">
+    <div className="flex-1 bg-stone-50/50 py-16 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Title Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-brand-gold-700 font-bold text-xs uppercase tracking-widest bg-brand-gold-100/60 px-4 py-1.5 rounded-full inline-block mb-3">
+          <span className="text-brand-gold-700 font-bold text-xs uppercase tracking-widest bg-brand-gold-100/60 px-4 py-1.5 rounded-full inline-block mb-3 font-sans">
             Connect With Us
           </span>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold text-zinc-900 leading-tight">
             Contact Goushala NGO
           </h1>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-brand-gold-400 to-amber-600 mx-auto mt-4 rounded-full"></div>
-          <p className="text-slate-500 mt-6 text-base md:text-lg font-light leading-relaxed">
-            Have questions about cow adoptions, visiting timings, or donating fodder?
-            Reach out to our NGO office. We would love to hear from you.
+          <div className="h-1 w-20 bg-brand-gold-500 mx-auto mt-4 rounded-full"></div>
+          <p className="text-zinc-500 mt-5 text-sm md:text-base font-light leading-relaxed">
+            Have questions about cow adoptions, visiting timings, or donating green fodder? Reach out to our trustee desk. We would love to guide you.
           </p>
         </div>
 
@@ -41,51 +40,50 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-6">
 
             {/* Address */}
-            <div className="bg-white border border-brand-gold-100/60 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow-lg hover:border-brand-gold-200 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
-              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600">
-                <MapPin className="w-6 h-6" />
+            <div className="bg-white border border-stone-200/80 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow transition-shadow duration-300">
+              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600 border border-brand-gold-500/20 shrink-0">
+                <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-base font-serif font-bold text-slate-800">Goushala Sanctuary</h4>
-                <p className="text-slate-500 text-sm font-light leading-relaxed mt-1">
-                  Krishna Govind Sanctuary, Raman Reti,<br />
-                  Vrindavan, Mathura, Uttar Pradesh, 281121
+                <h4 className="font-serif font-bold text-zinc-800 text-sm md:text-base">Goushala Sanctuary Office</h4>
+                <p className="text-zinc-500 text-xs md:text-sm font-light leading-relaxed mt-1.5">
+                  Krishna Govind Sanctuary, Randhela,<br />
+                  Salumber, Rajasthan - 313027
                 </p>
               </div>
             </div>
 
             {/* Calling Details */}
-            <div className="bg-white border border-brand-gold-100/60 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow-lg hover:border-brand-gold-200 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
-              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600">
-                <Phone className="w-6 h-6" />
+            <div className="bg-white border border-stone-200/80 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow transition-shadow duration-300">
+              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600 border border-brand-gold-500/20 shrink-0">
+                <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-base font-serif font-bold text-slate-800">Call/WhatsApp Support</h4>
-                <p className="text-slate-600 text-sm font-mono mt-1">+91 77421 151320</p>
-                <p className="text-slate-600 text-sm font-mono mt-0.5">+91 99999 88888</p>
+                <h4 className="font-serif font-bold text-zinc-800 text-sm md:text-base">Call/WhatsApp Support</h4>
+                <p className="text-zinc-650 text-xs md:text-sm font-mono mt-1.5">+91 77421 15132</p>
+                <p className="text-zinc-450 text-[10px] uppercase font-light mt-0.5 tracking-wider">Available 9:00 AM - 6:00 PM</p>
               </div>
             </div>
 
             {/* Email Support */}
-            <div className="bg-white border border-brand-gold-100/60 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow-lg hover:border-brand-gold-200 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
-              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600">
-                <Mail className="w-6 h-6" />
+            <div className="bg-white border border-stone-200/80 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow transition-shadow duration-300">
+              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600 border border-brand-gold-500/20 shrink-0">
+                <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-base font-serif font-bold text-slate-800">Email Address</h4>
-                <p className="text-slate-600 text-sm font-light mt-1">info@krishnagovindsevasansthan.org</p>
-                <p className="text-slate-600 text-sm font-light mt-0.5">contact@krishnagovindsevasansthan.org</p>
+                <h4 className="font-serif font-bold text-zinc-800 text-sm md:text-base">Email Addresses</h4>
+                <p className="text-zinc-650 text-xs md:text-sm font-mono mt-1.5">info@krishnagovindsevasansthan.org</p>
               </div>
             </div>
 
             {/* Timings */}
-            <div className="bg-white border border-brand-gold-100/60 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow-lg hover:border-brand-gold-200 hover:-translate-y-0.5 transition-all duration-300 cursor-default">
-              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600">
-                <Clock className="w-6 h-6" />
+            <div className="bg-white border border-stone-200/80 p-6 rounded-2xl flex space-x-4 shadow-sm hover:shadow transition-shadow duration-300">
+              <div className="bg-brand-gold-500/10 p-3 rounded-xl h-fit text-brand-gold-600 border border-brand-gold-500/20 shrink-0">
+                <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-base font-serif font-bold text-slate-800">Visiting Hours</h4>
-                <p className="text-slate-500 text-sm font-light leading-relaxed mt-1">
+                <h4 className="font-serif font-bold text-zinc-800 text-sm md:text-base">Visiting Hours</h4>
+                <p className="text-zinc-550 text-xs md:text-sm font-light leading-relaxed mt-1.5">
                   Morning: 07:00 AM — 11:30 AM <br />
                   Evening: 04:00 PM — 07:30 PM <br />
                   (Open on all days including Sundays)
@@ -93,64 +91,36 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Social Pages Card */}
-            <div className="bg-white border border-brand-gold-100/60 p-6 rounded-2xl space-y-4 shadow-sm hover:shadow-lg hover:border-brand-gold-200 transition-all duration-300">
-              <h4 className="text-base font-serif font-bold text-slate-800">Follow Our Social Channels</h4>
-              <p className="text-xs text-slate-500 font-light leading-relaxed">
-                Watch daily feeds of cow feeding and live ceremonies directly from our trust channels.
-              </p>
-              <div className="flex space-x-3">
-                <a
-                  href="https://instagram.com/krishnagovindsevasansthan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-pink-500 to-rose-600 hover:scale-105 active:scale-95 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm hover:shadow transition-all duration-300"
-                >
-                  Instagram
-                </a>
-                <a
-                  href="https://facebook.com/krishnagovindsevasansthan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-blue-600 hover:bg-blue-700 hover:scale-105 active:scale-95 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm hover:shadow transition-all duration-300"
-                >
-                  Facebook
-                </a>
-                <a
-                  href="https://youtube.com/krishnagovindsevasansthan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-red-600 hover:bg-red-700 hover:scale-105 active:scale-95 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm hover:shadow transition-all duration-300"
-                >
-                  YouTube
-                </a>
-              </div>
-            </div>
-
           </div>
 
           {/* Right Column: Interactive Form */}
-          <div className="lg:col-span-7 bg-white border border-brand-gold-100/60 p-8 rounded-3xl shadow-xl relative overflow-hidden hover:border-brand-gold-200 transition-all duration-300">
-            <h3 className="text-xl font-serif font-bold text-slate-800 mb-6 flex items-center space-x-2">
+          <div className="lg:col-span-7 bg-white border border-stone-200/80 p-6 md:p-8 rounded-3xl shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-gold-500"></div>
+            
+            <h3 className="text-xl font-serif font-bold text-zinc-950 mb-6 flex items-center space-x-2">
               <MessageSquare className="w-5 h-5 text-brand-gold-500" />
               <span>Send An Inquiry</span>
             </h3>
 
             {isSubmitted ? (
-              <div className="py-12 text-center space-y-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-16 text-center space-y-4"
+              >
                 <div className="inline-flex justify-center bg-emerald-50 p-4 rounded-full border border-emerald-100">
                   <CheckCircle2 className="w-12 h-12 text-emerald-600 animate-bounce" />
                 </div>
-                <h4 className="text-lg font-bold text-slate-800">Inquiry Sent Successfully!</h4>
-                <p className="text-slate-500 text-xs font-light max-w-sm mx-auto">
-                  Thank you for writing to us. Our trust representative will respond back to you via email shortly.
+                <h4 className="text-lg font-bold text-zinc-850">Inquiry Sent Successfully!</h4>
+                <p className="text-zinc-500 text-xs font-light max-w-sm mx-auto leading-relaxed">
+                  Thank you for writing to us. Our trust representative will respond back to you via email within 24 hours.
                 </p>
-              </div>
+              </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 text-xs font-semibold text-slate-700">
+              <form onSubmit={handleSubmit} className="space-y-5 text-xs font-semibold text-zinc-650">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">
+                    <label className="block text-[11px] font-bold text-zinc-500 mb-1.5 uppercase tracking-wider font-sans">
                       Your Name
                     </label>
                     <input
@@ -158,12 +128,12 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Anand Sharma"
-                      className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                      className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">
+                    <label className="block text-[11px] font-bold text-zinc-500 mb-1.5 uppercase tracking-wider font-sans">
                       Email Address
                     </label>
                     <input
@@ -171,45 +141,46 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. anand@example.com"
-                      className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                      className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">
+                  <label className="block text-[11px] font-bold text-zinc-500 mb-1.5 uppercase tracking-wider font-sans">
                     Subject
                   </label>
                   <input
                     type="text"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="e.g. Visit scheduling / Adopt-a-cow query"
-                    className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                    placeholder="e.g. Fodder donation / Cow adoption inquiry"
+                    className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all font-sans"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">
+                  <label className="block text-[11px] font-bold text-zinc-500 mb-1.5 uppercase tracking-wider font-sans">
                     Your Message
                   </label>
                   <textarea
                     rows="4"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Write details of your query..."
-                    className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-brand-gold-500 resize-none transition-all duration-300"
+                    placeholder="Describe your query in detail..."
+                    className="w-full bg-stone-50 border border-stone-200 focus:bg-white rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 resize-none transition-all font-sans"
                     required
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl text-white font-bold bg-gradient-to-r from-brand-gold-500 to-amber-600 shadow-md hover:shadow-lg hover:brightness-105 active:scale-[0.99] transition-all cursor-pointer text-center text-sm"
+                  className="w-full py-4 rounded-xl text-white font-bold bg-zinc-950 hover:bg-brand-gold-600 transition-colors shadow-sm cursor-pointer text-center text-xs flex items-center justify-center space-x-2"
                 >
-                  Send Inquiry Message
+                  <Send className="w-4 h-4" />
+                  <span>Send Inquiry Message</span>
                 </button>
               </form>
             )}
@@ -218,27 +189,26 @@ export default function ContactPage() {
         </div>
 
         {/* Map Placeholder Block */}
-        <div className="bg-slate-100 rounded-3xl h-96 w-full relative overflow-hidden border border-slate-200/50 shadow-inner flex items-center justify-center text-center">
-          <div className="absolute inset-0 bg-slate-900/10 z-10"></div>
+        <div className="bg-white border border-stone-200/80 rounded-3xl p-8 h-96 w-full relative overflow-hidden shadow-sm flex items-center justify-center text-center">
+          <div className="absolute inset-0 bg-stone-50/50 z-10"></div>
+          {/* Grid pattern */}
+          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-75"></div>
 
-          {/* Mock Map Background Visual */}
-          <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-75"></div>
-
-          <div className="relative z-20 max-w-sm px-4">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-gold-700 bg-brand-gold-100 px-3 py-1 rounded-full border border-brand-gold-200">
-              Interactive Map
+          <div className="relative z-20 max-w-sm px-4 space-y-4">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-gold-700 bg-brand-gold-50 border border-brand-gold-150 px-3 py-1 rounded-full font-sans">
+              Sanctuary Maps
             </span>
-            <h3 className="text-xl font-serif font-bold text-slate-800 mt-3">Goushala Sanctuary Location</h3>
-            <p className="text-slate-500 text-xs font-light mt-2 leading-relaxed">
-              Located near Raman Reti, Vrindavan. Open daily for Gau Puja and fodder donation ceremonies.
+            <h3 className="text-xl font-serif font-bold text-zinc-800">Physical Goushala Sanctuary</h3>
+            <p className="text-zinc-500 text-xs font-light leading-relaxed">
+              Located at Randhela, Salumber, Rajasthan. Easily accessible by state highways from Udaipur.
             </p>
             <a
               href="https://maps.google.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-4 bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs px-5 py-2.5 rounded-full transition-all"
+              className="inline-flex items-center space-x-1.5 bg-zinc-950 hover:bg-brand-gold-600 hover:text-white text-white font-bold text-xs px-6 py-3 rounded-full transition-all cursor-pointer shadow-sm"
             >
-              Get Driving Directions
+              <span>Get Driving Directions</span>
             </a>
           </div>
         </div>

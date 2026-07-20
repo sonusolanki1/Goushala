@@ -10,7 +10,6 @@ import { authenticateJWT } from "../middleware/auth.js";
 dotenv.config();
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET;
 
 // Admin Login Route
 router.post("/login", async (req, res) => {
@@ -33,7 +32,7 @@ router.post("/login", async (req, res) => {
 
     const accessToken = jwt.sign(
       { id: user._id, username: user.username, role: user.role || "admin" },
-      JWT_SECRET,
+      process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
 
