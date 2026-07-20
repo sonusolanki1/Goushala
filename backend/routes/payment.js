@@ -10,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Create checkout session
 router.post('/create-checkout-session', async (req, res) => {
-  const { amount, donorName, donorEmail, sevaType } = req.body;
+  const { amount, donorName, donorEmail, donorPhone, sevaType } = req.body;
 
   if (!amount || amount <= 0) {
     return res.status(400).json({ error: 'Invalid donation amount' });
@@ -39,6 +39,7 @@ router.post('/create-checkout-session', async (req, res) => {
       metadata: {
         donorName: donorName || 'Anonymous',
         donorEmail: donorEmail || 'N/A',
+        donorPhone: donorPhone || '',
         sevaType: sevaType || 'General Seva',
         amount: amount.toString(),
       },
@@ -49,6 +50,8 @@ router.post('/create-checkout-session', async (req, res) => {
       stripe_session_id: session.id,
       donor_name: donorName || 'Anonymous',
       donor_email: donorEmail || 'N/A',
+      donor_phone: donorPhone || '',
+      seva_type: sevaType || 'General Seva',
       amount: amount,
       currency: 'inr',
       status: 'pending'
@@ -73,7 +76,11 @@ router.get('/verify-session/:sessionId', async (req, res) => {
     if (session.payment_status === 'paid') {
       const donorName = session.metadata.donorName || session.customer_details?.name || 'Anonymous';
       const donorEmail = session.metadata.donorEmail || session.customer_details?.email || 'N/A';
+      const donorPhone = session.metadata.donorPhone || session.customer_details?.phone || '';
+      const sevaType = session.metadata.sevaType || 'General Seva';
       const amount = parseFloat(session.metadata.amount) || (session.amount_total / 100);
+      const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : (session.payment_intent?.id || '');
+      const paymentMethod = session.payment_method_types?.[0] || 'card';
 
       // Find in our database and update status to completed
       let donation = await Donation.findOne({ stripe_session_id: sessionId });
@@ -81,15 +88,23 @@ router.get('/verify-session/:sessionId', async (req, res) => {
       if (donation) {
         donation.donor_name = donorName;
         donation.donor_email = donorEmail;
+        donation.donor_phone = donorPhone;
+        donation.seva_type = sevaType;
+        donation.payment_intent_id = paymentIntentId;
+        donation.payment_method = paymentMethod;
         donation.status = 'completed';
         await donation.save();
       } else {
         donation = new Donation({
           stripe_session_id: sessionId,
+          payment_intent_id: paymentIntentId,
           donor_name: donorName,
           donor_email: donorEmail,
+          donor_phone: donorPhone,
+          seva_type: sevaType,
           amount: amount,
           currency: 'inr',
+          payment_method: paymentMethod,
           status: 'completed'
         });
         await donation.save();

@@ -10,7 +10,7 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 
 // Import Mongoose DB connection & models
-import './db.js';
+import "./db.js";
 import Donation from "./models/Donation.js";
 
 import paymentRouter from "./routes/payment.js";
@@ -52,7 +52,7 @@ app.use("/api/", apiLimiter);
 // Enable CORS
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   }),
 );
@@ -94,9 +94,17 @@ app.post(
         "Anonymous";
       const donorEmail =
         session.metadata.donorEmail || session.customer_details?.email || "N/A";
+      const donorPhone =
+        session.metadata.donorPhone || session.customer_details?.phone || "";
+      const sevaType = session.metadata.sevaType || "General Seva";
       const amount =
         parseFloat(session.metadata.amount) || session.amount_total / 100;
       const sessionId = session.id;
+      const paymentIntentId =
+        typeof session.payment_intent === "string"
+          ? session.payment_intent
+          : session.payment_intent?.id || "";
+      const paymentMethod = session.payment_method_types?.[0] || "card";
 
       console.log(
         `Donation received! Session: ${sessionId}, Name: ${donorName}, Amount: ${amount}`,
@@ -109,15 +117,23 @@ app.post(
         if (donation) {
           donation.donor_name = donorName;
           donation.donor_email = donorEmail;
+          donation.donor_phone = donorPhone;
+          donation.seva_type = sevaType;
+          donation.payment_intent_id = paymentIntentId;
+          donation.payment_method = paymentMethod;
           donation.status = "completed";
           await donation.save();
         } else {
           donation = new Donation({
             stripe_session_id: sessionId,
+            payment_intent_id: paymentIntentId,
             donor_name: donorName,
             donor_email: donorEmail,
+            donor_phone: donorPhone,
+            seva_type: sevaType,
             amount: amount,
             currency: "inr",
+            payment_method: paymentMethod,
             status: "completed",
           });
           await donation.save();

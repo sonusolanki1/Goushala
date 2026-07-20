@@ -3,48 +3,45 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import Donation from "../models/Donation.js";
 import PageView from "../models/PageView.js";
+import User from "../models/User.js";
+import bcrypt from "bcryptjs";
+import { authenticateJWT } from "../middleware/auth.js";
 
 dotenv.config();
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// JWT Authentication Middleware
-export const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-      if (err) {
-        return res
-          .status(403)
-          .json({ error: "Session expired or invalid token" });
-      }
-      req.user = user;
-      next();
-    });
-  } else {
-    res.status(401).json({ error: "Authorization header missing" });
-  }
-};
-
 // Admin Login Route
-router.post("/login", (req, res) => {
-  const { username, password } = req.body;
+router.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-  const expectedUsername = process.env.ADMIN_USERNAME;
-  const expectedPassword = process.env.ADMIN_PASSWORD;
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password are required" });
+    }
 
-  if (username === expectedUsername && password === expectedPassword) {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid username or password" });
+    }
+
     const accessToken = jwt.sign(
-      { username: username, role: "admin" },
+      { id: user._id, username: user.username, role: user.role || "admin" },
       JWT_SECRET,
-      { expiresIn: "2h" },
+      { expiresIn: "2h" }
     );
-    return res.json({ token: accessToken });
-  }
 
-  res.status(401).json({ error: "Invalid username or password" });
+    return res.json({ token: accessToken });
+  } catch (error) {
+    console.error("Admin login error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // Admin Dashboard Summary Stats using Mongoose

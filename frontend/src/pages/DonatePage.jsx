@@ -10,6 +10,7 @@ export default function DonatePage() {
   const [amount, setAmount] = useState(501);
   const [donorName, setDonorName] = useState('');
   const [donorEmail, setDonorEmail] = useState('');
+  const [donorPhone, setDonorPhone] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [copiedField, setCopiedField] = useState('');
@@ -73,6 +74,11 @@ export default function DonatePage() {
       return;
     }
 
+    if (!donorPhone.trim()) {
+      setErrorMessage('Please enter your phone number.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -88,6 +94,7 @@ export default function DonatePage() {
           amount: parsedAmount,
           donorName,
           donorEmail,
+          donorPhone,
           sevaType: selectedSevaLabel,
         }),
       });
@@ -328,6 +335,21 @@ export default function DonatePage() {
                   value={donorEmail}
                   onChange={(e) => setDonorEmail(e.target.value)}
                   placeholder="e.g. rajesh@example.com"
+                  className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
+                  required
+                />
+              </div>
+
+              {/* Donor Phone */}
+              <div>
+                <label className="block text-[10px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+                  Your Phone Number
+                </label>
+                <input
+                  type="tel"
+                  value={donorPhone}
+                  onChange={(e) => setDonorPhone(e.target.value)}
+                  placeholder="e.g. +91 9876543210"
                   className="w-full bg-slate-50/50 hover:bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-brand-gold-500/5 rounded-xl px-4 py-3 text-sm text-zinc-800 focus:outline-none focus:border-brand-gold-500 transition-all duration-300"
                   required
                 />

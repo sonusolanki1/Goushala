@@ -250,10 +250,20 @@ export default function AdminDashboard() {
 
   // Filter donations
   const filteredDonations = donations.filter(donation => {
+    const donorName = donation.donor_name || '';
+    const donorEmail = donation.donor_email || '';
+    const donorPhone = donation.donor_phone || '';
+    const sevaType = donation.seva_type || '';
+    const stripeSessionId = donation.stripe_session_id || '';
+    const paymentIntentId = donation.payment_intent_id || '';
+
     const matchesSearch = 
-      donation.donor_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      donation.donor_email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (donation.stripe_session_id && donation.stripe_session_id.toLowerCase().includes(searchTerm.toLowerCase()));
+      donorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      donorEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      donorPhone.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      sevaType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      stripeSessionId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      paymentIntentId.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesStatus = 
       statusFilter === 'all' || 
@@ -542,8 +552,9 @@ export default function AdminDashboard() {
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
                       <tr className="bg-slate-950/80 text-slate-400 font-bold border-b border-slate-800 uppercase tracking-wider">
-                        <th className="p-4">Donor Name & Email</th>
-                        <th className="p-4">Donation Session</th>
+                        <th className="p-4">Donor Contact</th>
+                        <th className="p-4">Seva Sponsoring</th>
+                        <th className="p-4">Transaction Details</th>
                         <th className="p-4">Amount</th>
                         <th className="p-4">Status</th>
                         <th className="p-4">Date & Time</th>
@@ -552,15 +563,38 @@ export default function AdminDashboard() {
                     <tbody className="divide-y divide-slate-850">
                       {filteredDonations.length > 0 ? (
                         filteredDonations.map((donation) => (
-                          <tr key={donation.id} className="hover:bg-slate-850/30 transition-colors">
+                          <tr key={donation._id || donation.id} className="hover:bg-slate-850/30 transition-colors">
                             <td className="p-4">
-                              <span className="font-semibold text-white block">{donation.donor_name}</span>
-                              <span className="text-[10px] text-slate-500 font-mono block mt-0.5">{donation.donor_email}</span>
+                              <span className="font-semibold text-white block text-sm">{donation.donor_name}</span>
+                              <span className="text-[10px] text-slate-400 font-mono block mt-0.5">{donation.donor_email}</span>
+                              {donation.donor_phone && (
+                                <span className="text-[10px] text-brand-gold-400 font-mono block mt-0.5">{donation.donor_phone}</span>
+                              )}
                             </td>
                             <td className="p-4">
-                              <span className="font-mono text-slate-400 text-[10px] break-all block max-w-xs md:max-w-md">
-                                {donation.stripe_session_id || 'Manual Log'}
+                              <span className="bg-slate-950 border border-slate-800 text-slate-200 px-2.5 py-1 rounded-lg font-medium inline-block text-[10px]">
+                                {donation.seva_type || 'General Seva'}
                               </span>
+                            </td>
+                            <td className="p-4">
+                              <div className="space-y-1 text-[10px] font-mono">
+                                <div>
+                                  <span className="text-slate-500 font-semibold">Session: </span>
+                                  <span className="text-slate-300 break-all">{donation.stripe_session_id || 'Manual Log'}</span>
+                                </div>
+                                {donation.payment_intent_id && (
+                                  <div>
+                                    <span className="text-slate-500 font-semibold">Intent: </span>
+                                    <span className="text-slate-300 break-all">{donation.payment_intent_id}</span>
+                                  </div>
+                                )}
+                                {donation.payment_method && (
+                                  <div>
+                                    <span className="text-slate-500 font-semibold">Method: </span>
+                                    <span className="bg-slate-950 text-slate-400 px-1.5 py-0.5 rounded uppercase tracking-wider text-[9px]">{donation.payment_method}</span>
+                                  </div>
+                                )}
+                              </div>
                             </td>
                             <td className="p-4 font-serif font-bold text-slate-200 text-sm">
                               ₹{donation.amount.toLocaleString('en-IN')}
@@ -581,7 +615,7 @@ export default function AdminDashboard() {
                         ))
                       ) : (
                         <tr>
-                          <td colSpan="5" className="p-8 text-center text-slate-500 font-light italic">
+                          <td colSpan="6" className="p-8 text-center text-slate-500 font-light italic">
                             No donations records matching filters.
                           </td>
                         </tr>

@@ -6,6 +6,10 @@ const donationSchema = new mongoose.Schema({
     unique: true,
     sparse: true
   },
+  payment_intent_id: {
+    type: String,
+    default: ''
+  },
   donor_name: {
     type: String,
     default: 'Anonymous'
@@ -14,6 +18,14 @@ const donationSchema = new mongoose.Schema({
     type: String,
     default: 'N/A'
   },
+  donor_phone: {
+    type: String,
+    default: ''
+  },
+  seva_type: {
+    type: String,
+    default: 'General Seva'
+  },
   amount: {
     type: Number,
     required: true
@@ -21,6 +33,10 @@ const donationSchema = new mongoose.Schema({
   currency: {
     type: String,
     default: 'inr'
+  },
+  payment_method: {
+    type: String,
+    default: 'card'
   },
   status: {
     type: String,
