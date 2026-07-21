@@ -5,11 +5,6 @@
 **/dist/
 **/dist-ssr/
 
-# Local environmental secret variables
-**/.env
-**/.env.production
-**/.env.local
-**/.env.*.local
 
 # Databases & local logs
 **/*.db
